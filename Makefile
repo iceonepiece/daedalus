@@ -1,4 +1,4 @@
-OBJS = ./src/*.cpp
+OBJS = ./src/*.cpp ./src/*/*.cpp
 CC = g++
 COMPILER_FLAGS = -w -std=c++17
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lbox2d
