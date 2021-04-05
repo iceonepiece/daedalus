@@ -15,8 +15,8 @@ public:
 private:
   bool mIsRunning;
   SDL_Window* mWindow;
-	SDL_Renderer* mRenderer;
-	Uint32 mTicksCount;
+  SDL_Renderer* mRenderer;
+  Uint32 mTicksCount;
 
   void ProcessInput();
   void Update();
