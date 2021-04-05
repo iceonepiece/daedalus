@@ -1,26 +1,24 @@
 #pragma once
 
-#include <iostream>
 #include <SDL2/SDL.h>
-#include <box2d/box2d.h>
-#include "Scene.hpp"
 
-class Game {
-private:
-  SDL_Window *window;
-  SDL_Renderer *renderer;
-  Uint32 mTicksCount;
-  Scene* scene;
-
+class Game
+{
 public:
-  bool isRunning;
-
   Game();
   ~Game();
 
-  void initialize(int width, int height);
-  void processInput();
-  void update();
-  void render();
-  void destroy();
+  bool Initialize(int width, int height);
+  void Run();
+  void Destroy();
+
+private:
+  bool mIsRunning;
+  SDL_Window* mWindow;
+	SDL_Renderer* mRenderer;
+	Uint32 mTicksCount;
+
+  void ProcessInput();
+  void Update();
+  void Render();
 };

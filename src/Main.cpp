@@ -1,16 +1,15 @@
-#include <box2d/box2d.h>
-#include "./core/Game.hpp"
+#include "core/Game.hpp"
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
   Game game = Game();
+  bool success = game.Initialize(800, 600);
 
-  game.initialize(800, 600);
-
-  while (game.isRunning) {
-    game.processInput();
-    game.update();
-    game.render();
+  if (success)
+  {
+    game.Run();
   }
 
-  game.destroy();
+  game.Destroy();
+  return 0;
 }
