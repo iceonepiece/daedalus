@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <SDL2/SDL.h>
+#include "Physics.hpp"
 
 class Game
 {
@@ -16,6 +17,8 @@ public:
   void AddEntity(class Entity* entity);
   void RemoveEntity(class Entity* entity);
 
+  Physics* GetPhysics() { return &mPhysics; }
+
   // Game specific
   void AddBoxComponent(class BoxComponent* boxComponent);
   void RemoveBoxComponent(class BoxComponent* boxComponent);
@@ -27,6 +30,8 @@ private:
   Uint32 mTicksCount;
 
   std::vector<class Entity*> mEntities;
+
+  Physics mPhysics;
 
   void ProcessInput();
   void Update();

@@ -1,7 +1,9 @@
 #include "Game.hpp"
 #include "Entity.hpp"
 #include "../game/Player.hpp"
+#include "../game/Tile.hpp"
 #include "../game/BoxComponent.hpp"
+#include <iostream>
 
 Game::Game()
 :mIsRunning(true)
@@ -128,6 +130,7 @@ void Game::Update()
   mTicksCount = SDL_GetTicks();
 
   // Do something here
+  mPhysics.Update(deltaTime);
 }
 
 void Game::Render()
@@ -140,6 +143,11 @@ void Game::Render()
   {
     BoxComponent* box = mBoxComponents[i];
     box->Draw(mRenderer);
+    b2Body* body = box->GetBody();
+    if (body)
+    {
+      std::cout << body->GetPosition().x << ":" << body->GetPosition().y << std::endl;
+    }
   }
 
   SDL_RenderPresent(mRenderer);
@@ -147,7 +155,12 @@ void Game::Render()
 
 void Game::LoadData()
 {
-  Player* player = new Player(this);
+  new Player(this);
+
+  for (int i = 0; i < 16; i++)
+  {
+    new Tile(this, Vector2(4 + i * 4.0f, 50.0f));
+  }
 }
 
 void Game::UnloadData()
