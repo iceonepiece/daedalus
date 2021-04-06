@@ -1,11 +1,11 @@
 #include "BoxComponent.hpp"
-#include "Entity.hpp"
-#include "Game.hpp"
+#include "../core/Entity.hpp"
+#include "../core/Game.hpp"
 
 BoxComponent::BoxComponent(Entity* owner)
 :Component(owner)
 ,mPosition(Vector2(0.0f, 0.0f))
-,mSize(Vector2(32.0f, 32.0f))
+,mSize(Vector2(0.0f, 0.0f))
 {
   mOwner->GetGame()->AddBoxComponent(this);
 }

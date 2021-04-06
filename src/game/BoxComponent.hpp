@@ -1,8 +1,8 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include "Math.hpp"
-#include "Component.hpp"
+#include "../core/Math.hpp"
+#include "../core/Component.hpp"
 
 class BoxComponent : public Component
 {

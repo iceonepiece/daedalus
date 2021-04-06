@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "Entity.hpp"
-#include "Player.hpp"
-#include "BoxComponent.hpp"
+#include "../game/Player.hpp"
+#include "../game/BoxComponent.hpp"
 
 Game::Game()
 :mIsRunning(true)
