@@ -1,4 +1,7 @@
 #include "Game.hpp"
+#include "Entity.hpp"
+#include "Player.hpp"
+#include "BoxComponent.hpp"
 
 Game::Game()
 :mIsRunning(true)
@@ -43,11 +46,45 @@ bool Game::Initialize(int width, int height)
     return false;
   }
 
+  LoadData();
   mTicksCount = SDL_GetTicks();
 
   return true;
 }
 
+void Game::Destroy()
+{
+  UnloadData();
+  SDL_DestroyRenderer(mRenderer);
+  SDL_DestroyWindow(mWindow);
+  SDL_Quit();
+}
+
+void Game::AddEntity(Entity* entity)
+{
+  mEntities.emplace_back(entity);
+}
+
+void Game::RemoveEntity(Entity* entity)
+{
+  auto iter = std::find(mEntities.begin(), mEntities.end(), entity);
+  if (iter != mEntities.end())
+  {
+    std::iter_swap(iter, mEntities.end() - 1);
+    mEntities.pop_back();
+  }
+}
+
+void Game::AddBoxComponent(class BoxComponent* boxComponent)
+{
+  mBoxComponents.emplace_back(boxComponent);
+}
+
+void Game::RemoveBoxComponent(class BoxComponent* boxComponent)
+{
+  auto iter = std::find(mBoxComponents.begin(), mBoxComponents.end(), boxComponent);
+  mBoxComponents.erase(iter);
+}
 
 void Game::Run()
 {
@@ -99,13 +136,24 @@ void Game::Render()
   SDL_RenderClear(mRenderer);
 
   // Do something here
+  for (int i = 0; i < mBoxComponents.size(); i++)
+  {
+    BoxComponent* box = mBoxComponents[i];
+    box->Draw(mRenderer);
+  }
 
   SDL_RenderPresent(mRenderer);
 }
 
-void Game::Destroy()
+void Game::LoadData()
 {
-  SDL_DestroyRenderer(mRenderer);
-  SDL_DestroyWindow(mWindow);
-  SDL_Quit();
+  Player* player = new Player(this);
+}
+
+void Game::UnloadData()
+{
+  while (!mEntities.empty())
+  {
+    delete mEntities.back();
+  }
 }
