@@ -1,15 +1,17 @@
-#include "core/Game.hpp"
+#include "core/Editor.hpp"
 
 int main(int argc, char** argv)
 {
-  Game game = Game();
-  bool success = game.Initialize(800, 600);
+  Editor editor = Editor(1280, 720);
+
+  bool success = editor.Initialize();
 
   if (success)
   {
-    game.Run();
+    editor.Run();
   }
 
-  game.Destroy();
+  editor.Destroy();
+
   return 0;
 }
