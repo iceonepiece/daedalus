@@ -1,17 +1,18 @@
-#include "core/Editor.hpp"
+#include "core/Application.hpp"
+#include "core/Window/SDLWindow.hpp"
 
 int main(int argc, char** argv)
 {
-  Editor editor = Editor(1280, 720);
+  Application app = Application(new SDLWindow(800, 600));
 
-  bool success = editor.Initialize();
+  bool success = app.Initialize();
 
   if (success)
   {
-    editor.Run();
+    app.Run();
   }
 
-  editor.Destroy();
+  app.Destroy();
 
   return 0;
 }
